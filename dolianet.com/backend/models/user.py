@@ -9,8 +9,8 @@ Base = declarative_base()
 class User(Base):
     """The User class representation"""
     __tablename__ = "users"
-    user_id = Column(Integer, primary_key=True, nullable=False)
+    user_id = Column(Integer, auto_increment=True, nullable=False)
     user_name = Column(String(255), nullable=False)
-    email = Column(String(255), nullable=False)
+    email = Column(String(255), primary_key=True, nullable=False)
     user_phrase = Column(String(255), nullable=False)
     password = Column(String(255), nullable=False)
