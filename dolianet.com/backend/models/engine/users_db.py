@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """User module to handle all User methods"""
 from typing import List
-from datetime import datetime
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.exc import InvalidRequestError
 from models.user import User
