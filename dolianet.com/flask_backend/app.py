@@ -5,10 +5,11 @@ from flask_sqlalchemy import SQLAlchemy
 
 from sqlalchemy.sql import func
 
-app = Flask(__name__, template_folder='../')
+app = Flask(__name__) #template_folder='../templates', static_url_path='/../static')
 app.config['SQLALCHEMY_DATABASE_URI'] =\
         "mysql://dolianet_dev:senjuu@localhost:3306/dolianet"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+#app.config['STATIC_FOLDER'] = '../static'
 
 db = SQLAlchemy(app)
 
@@ -29,6 +30,11 @@ class User(db.Model):
     @app.route('/', methods=["POST", "GET"], strict_slashes=False)
     def homepage():
         """Renders the landing page of Dolianet"""
+        return render_template("index-2.html")
+
+    @app.route('/index-2.html', methods=['POST', 'GET'], strict_slashes=False)
+    def redirect_homepage():
+        """Renders the homepage again"""
         return render_template("index-2.html")
 
     @app.route('/login.html', strict_slashes=False)
