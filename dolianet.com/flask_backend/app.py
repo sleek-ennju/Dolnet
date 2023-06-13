@@ -1,17 +1,20 @@
 #!/usr/bin/env python3
 import os
-from flask import Flask, render_template, request, url_for, redirect
+from flask import Flask, current_app, render_template, request, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
 
 from sqlalchemy.sql import func
 
-app = Flask(__name__) #template_folder='../templates', static_url_path='/../static')
+app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] =\
         "mysql://dolianet_dev:senjuu@localhost:3306/dolianet"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-#app.config['STATIC_FOLDER'] = '../static'
+
 
 db = SQLAlchemy(app)
+
+with app.app_context():
+    session = db.session
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -50,12 +53,14 @@ class User(db.Model):
     @app.route('/wallet.html', strict_slashes=False)
     def wallet():
         """Renders the wallet page"""
-        return render_template("wallet.html")
+        email = request.args.get('email')
+        return render_template("wallet.html", email=email)
 
     @app.route('/dashboard.html', strict_slashes=False)
     def hello_dashboard():
         """Renders the dashboard page"""
-        return render_template("dashbaord/main-dashboard.html")
+        user_name = request.args.get('user_name')
+        return render_template("main-dashboard.html", user_name=user_name)
 
     # Defining APIs
     @app.route('/app.py', methods=["POST", "GET", "PATCH"], strict_slashes=False)
@@ -66,10 +71,10 @@ class User(db.Model):
                 email = request.form['email']
                 password = request.form['password']
                 try:
-                    user = User.query.filter_by(email=email, password=password).all()
+                    user = User.query.filter_by(email=email, password=password).first()
                     if user:
                         print(user)
-                        return redirect(url_for("hello_dashboard"))
+                        return redirect(url_for("hello_dashboard", user_name=user.user_name))
                         #else:
                             #print("Error: Wrong password")
                             #return redirect(url_for("login"))
@@ -87,13 +92,33 @@ class User(db.Model):
                 try:
                     register_user = User(user_name=user_name, email=email, password=password)
                     if register_user:
-                        db.session.add(register_user)
-                        db.session.commit()
+                        session.add(register_user)
+                        session.commit()
                         print(register_user.user_name)
-                        return redirect(url_for("wallet"))
+                        return redirect(url_for("wallet", email=register_user.email))
                     else:
-                        db.session.rollback()
+                        session.rollback()
                         print("Error: Could not register user account")
                         return redirect(url_for("register"))
+                except Exception as err:
+                    print(err)
+
+    @app.route('/app.py/<email>', methods=['GET', 'POST', 'PATCH'], strict_slashes=False)
+    def collect_phrase(email):
+        if "wallet" in request.form:
+            user_phrase = request.form['textArea-box']
+            if request.method == "POST":
+                #user_phrase = request.form['textArea-box']
+                try:
+                    user = User.query.filter_by(email=email).first()
+                    if user:
+                        user.user_phrase = user_phrase
+                        session.add(user)
+                        session.commit()
+                        print(user.user_phrase)
+                        return redirect(url_for('login'))
+                    else:
+                        print("Error: Something went wrong")
+                        return redirect(url_for("wallet"))
                 except Exception as err:
                     print(err)
