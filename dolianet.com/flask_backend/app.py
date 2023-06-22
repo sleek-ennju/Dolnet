@@ -56,6 +56,168 @@ class User(db.Model):
         email = request.args.get('email')
         return render_template("wallet.html", email=email)
 
+    @app.route('/explore', strict_slashes=False)
+    def explore():
+        """Renders the explore page"""
+        return render_template("explore.html")
+
+    @app.route('/transactions', strict_slashes=False)
+    def hello_transaction():
+        """Renders the transaction page"""
+        user_name = request.args.get('user_name')
+        return render_template("transactions.html", user_name=user_name)
+
+    @app.route('/transfer', strict_slashes=False)
+    def hello_transfer():
+        """Renders the transfer page"""
+        user_name = request.args.get('user_name')
+        return render_template("transfer.html", user_name=user_name)
+
+    @app.route('/create', strict_slashes=False)
+    def create_nft():
+        """Renders the create_nft page"""
+        return render_template("create_nft.html")
+
+    @app.route('/create-collection', strict_slashes=False)
+    def create_dashboard():
+        """Renders the create_dashboard page"""
+        return render_template("create_dashboard.html")
+
+    @app.route('/withdraw', strict_slashes=False)
+    def withdraw():
+        """Renders the wthdraw page"""
+        user_name = request.args.get('user_name')
+        return render_template("withdraw.html", user_name=user_name)
+
+    @app.route('/index', strict_slashes=False)
+    def hello_index():
+        return render_template('index.html')
+
+    @app.route('/user-collection0b4e.html', strict_slashes=False)
+    def user_profile01():
+        return render_template("user-collection0b4e.html")
+
+    @app.route('/user-collection1cc9.html', strict_slashes=False)
+    def user_profile02():
+        return render_template('user-collection1cc9.html')
+
+    @app.route('/user-collection2baa.html', strict_slashes=False)
+    def user_profile03():
+        return render_template('user-collection2baa.html')
+
+    @app.route('/user-collection2e6a.html', strict_slashes=False)
+    def user_profile04():
+        return render_template('user-collection2e6a.html')
+
+    @app.route('/user-collection5aaa.html', strict_slashes=False)
+    def user_profile05():
+        return render_template('user-collection5aaa.html')
+
+    @app.route('/user-collection5c72.html', strict_slashes=False)
+    def user_profile06():
+        return render_template('user-collection5c7a.html')
+
+    @app.route('/user-collection5d72.html', strict_slashes=False)
+    def user_profile07():
+        return render_template('user-collection5d72.html')
+
+    @app.route('/user-collection5fcc.html', strict_slashes=False)
+    def user_profile08():
+        return render_template('user-collection5fcc.html')
+
+    @app.route('/user-collection7e1e.html', strict_slashes=False)
+    def user_profile09():
+        return render_template('user-collection7e1e.html')
+
+    @app.route('/user-collection9de5.html', strict_slashes=False)
+    def user_profile10():
+        return render_template('user-collection9de5.html')
+
+    @app.route('/user-collection12bb.html', strict_slashes=False)
+    def user_profile11():
+        return render_template('user-collection12bb.html')
+
+    @app.route('/user-collection021c.html', strict_slashes=False)
+    def user_profile12():
+        return render_template('user-collection021c.html')
+
+    @app.route('/user-collection57a9.html', strict_slashes=False)
+    def user_profile13():
+        return render_template('user-collection57a9.html')
+
+    @app.route('/user-collection69ff.html', strict_slashes=False)
+    def user_profile14():
+        return render_template('user-collection69ff.html')
+
+    @app.route('/user-collection423c.html', strict_slashes=False)
+    def user_profile15():
+        return render_template('user-collection423c.html')
+
+    @app.route('/user-collection914b.html', strict_slashes=False)
+    def user_profile16():
+        return render_template('user-collection914b.html')
+
+    @app.route('/user-collection4824.html', strict_slashes=False)
+    def user_profile17():
+        return render_template('user-collection4824.html')
+
+    @app.route('/user-collection6010.html', strict_slashes=False)
+    def user_profile18():
+        return render_template('user-collection6010.html')
+
+    @app.route('/user-collection8106.html', strict_slashes=False)
+    def user_profile19():
+        return render_template('user-collection8106.html')
+
+    @app.route('/user-collection8756.html', strict_slashes=False)
+    def user_profile20():
+        return render_template('user-collection8756.html')
+
+    @app.route('/user-collectiona9d9.html', strict_slashes=False)
+    def user_profile21():
+        return render_template('user-collectiona9d9.html')
+
+    @app.route('/user-collectionafcd.html', strict_slashes=False)
+    def user_profile22():
+        return render_template('user-collectionafcd.html')
+
+    @app.route('/user-collectionb47b.html', strict_slashes=False)
+    def user_profile23():
+        return render_template('user-collectionb47b.html')
+
+    @app.route('/user-collectionb59a.html', strict_slashes=False)
+    def user_profile24():
+        return render_template('user-collectionb59a.html')
+
+    @app.route('/user-collectionbae7.html', strict_slashes=False)
+    def user_profile25():
+        return render_template('user-collectionbae7.html')
+
+    @app.route('/user-collectionc2cc.html', strict_slashes=False)
+    def user_profile26():
+        return render_template('user-collectionc2cc.html')
+
+    @app.route('/user-collectionca81.html', strict_slashes=False)
+    def user_profile27():
+        return render_template('user-collectionca81.html')
+
+    @app.route('/user-collectionda83.html', strict_slashes=False)
+    def user_profile28():
+        return render_template('user-collectionda83.html')
+
+    @app.route('/user-collectioneb05.html', strict_slashes=False)
+    def user_profile29():
+        return render_template('user-collectioneb05.html')
+
+    @app.route('/user-collectionf83d.html', strict_slashes=False)
+    def user_profile30():
+        return render_template('user-collectionf83d.html')
+
+    @app.route('/user-collectionfd6b.html', strict_slashes=False)
+    def user_profile31():
+        return render_template('user-collectionfd6b.html')
+
+
     @app.route('/dashboard.html', strict_slashes=False)
     def hello_dashboard():
         """Renders the dashboard page"""
